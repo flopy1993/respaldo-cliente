@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux'
 import clientes from './clientes'
+import proveedores from './proveedores'
 
 const rootReducer = combineReducers(
     {
-        clientes
+        clientes,
+        proveedores
 
     }
 )

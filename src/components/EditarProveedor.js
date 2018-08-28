@@ -2,27 +2,49 @@ import React from 'react'
 import { Button, Modal, Form, Checkbox, Select } from 'semantic-ui-react'
 import $ from 'jquery'
 
-export default class NuevoCliente extends React.Component {
-    constructor(props) {
+export default class EditarProveedor extends React.Component {
+    constructor(props){
         super(props)
-        this.agregar = props.agregar
-        console.log(props)
+        this.editar = props.editar;
         this.state = {
             open: false,
-            id: 0,
-            razonSocial: '',
-            tipoContribuyente: 0,
-            provincia: 0,
-            domicilio: '',
-            localidad: 0,
-            cuit: 0,
-            ctacte: false
+            id: props.proveedor.id,
+            cuit: props.proveedor.cuit,
+            razonSocial: props.proveedor.razonSocial,
+            tipoContribuyente: props.proveedor.tipoContribuyente,
+            provincia: props.proveedor.provincia,
+            localidad: props.proveedor.localidad,
+            domicilio: props.proveedor.domicilio,
+            ctacte: props.proveedor.ctate,
+
+            res_id: props.id,
+            res_cuit: props.cuit,
+            res_razonSocial: props.razonSocial,
+            res_tipoContribuyente: props.tipoContribuyente,
+            res_provincia: props.provincia,
+            res_localidad: props.localidad,
+            res_domicilio: props.domicilio,
+            res_ctacte: props.ctacte
         }
     }
 
-    guardar = () => {
-        this.agregar({
-            
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({
+            cuit: nextProps.proveedor.cuit,
+            razonSocial: nextProps.proveedor.razonSocial,
+            tipoContribuyente: nextProps.proveedor.tipoContribuyente,
+            provincia: nextProps.proveedor.provincia,
+            localidad: nextProps.proveedor.localidad,
+            domicilio: nextProps.proveedor.domicilio,
+            ctacte: nextProps.proveedor.ctacte
+        })
+    }
+    
+     
+    modificar = () => {
+
+        this.editar({
+            id: this.state.id,
             razonSocial: this.state.razonSocial,
             tipoContribuyente: this.state.tipoContribuyente,
             provincia: this.state.provincia,
@@ -33,31 +55,30 @@ export default class NuevoCliente extends React.Component {
         })
 
         this.setState({
-            open: false,
-             razonSocial: '',
-            tipoContribuyente: 0,
-            provincia: 0,
-            domicilio: '',
-            localidad: 0,
-            cuit: 0,
-            ctacte: false
+            razonSocial: this.state.razonSocial,
+            tipoContribuyente: this.state.tipoContribuyente,
+            provincia: this.state.provincia,
+            domicilio: this.state.domicilio,
+            localidad: this.state.localidad,
+            cuit: this.state.cuit,
+            ctacte: this.state.ctacte,
+            open: false
         })
-    }
 
+    }
 
     close = () => this.setState({
         open: false,
-        razonSocial: '',
-        tipoContribuyente: 0,
-        provincia: 0,
-        domicilio: '',
-        localidad: 0,
-        cuit: 0,
-        ctacte: false
+        razonSocial: this.state.res_razonSocial,
+        tipoContribuyente: this.state.res_tipoContribuyente,
+        provincia: this.state.res_provincia,
+        domicilio: this.state.res_domicilio,
+        localidad: this.state.res_localidad,
+        cuit: this.props.res_cuit,
+        ctacte: this.props.res_ctacte,
     })
 
-    render() {
-
+    render(){
         let provincias = [];
         let localidad = [];
         let tipo = [];
@@ -79,10 +100,10 @@ export default class NuevoCliente extends React.Component {
 
         return (
             <div>
-                <Button onClick={() => this.setState({ open: true })}>Agregar</Button>
+                <Button onClick={() => this.setState({ open: true })}>Editar</Button>
 
                 <Modal size={'large'} open={this.state.open} onClose={() => this.close}>
-                    <Modal.Header>Nuevo Cliente</Modal.Header>
+                    <Modal.Header>Editar Cliente</Modal.Header>
                     <Modal.Content>
                         <Form>
                             <Form.Field>
@@ -111,10 +132,11 @@ export default class NuevoCliente extends React.Component {
                     </Modal.Content>
                     <Modal.Actions>
                         <Button negative onClick={this.close}>Cancelar</Button>
-                        <Button positive onClick={this.guardar} icon='checkmark' labelPosition='right' content='Guardar' />
+                        <Button positive onClick={this.modificar} icon='checkmark' labelPosition='right' content='Guardar' />
                     </Modal.Actions>
                 </Modal>
             </div>
         )
-    }
+   }
 }
+

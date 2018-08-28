@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
-import  { Container, Table, Label } from 'semantic-ui-react';
-import FilaCliente from './FilaCliente';
+import React from 'react'
+import FilaProveedor from './FilaProveedor'
+import { Container, Table, Label } from 'semantic-ui-react'
 
 
-export default class ListaClientes extends Component {   
-    
-    constructor(props){
-        super(props);
-        this.clientes = props.clientes;
+export default class ListaProveedores extends React.Component {
+    constructor(props) {
+        super(props)
+        this.proveedores = props.proveedores;
         this.editar = props.editar;
     }
 
-    
-    componentWillReceiveProps = (nextProps) => {
-        this.clientes = nextProps.clientes;
+    componentWillReceiveProps(nextProps) {
+        this.proveedores = nextProps.proveedores
     }
 
-    
-    render(){
-        const lista = this.clientes.map((cli)=> <FilaCliente key={cli.id} cliente={cli} editar={this.editar}/>);        
-       
+    render() {
+        const lista = this.proveedores.map((pro) => <FilaProveedor key={pro.id} proveedor={pro} editar={this.editar} />)
         return (
-            <Container>
-                
+            <Container>                
                 <Table compact color={"green"} striped verticalAlign={"bottom"} >
                     <Table.Header> 
                         <Table.Row>
-                            <Table.HeaderCell colSpan={8}><Label size="huge"> Clientes: </Label></Table.HeaderCell>
+                            <Table.HeaderCell colSpan={8}><Label size="huge"> Proveedores: </Label></Table.HeaderCell>
                         </Table.Row>
                         <Table.Row>
                             <Table.HeaderCell></Table.HeaderCell>                            
@@ -46,4 +41,3 @@ export default class ListaClientes extends Component {
         )
     }
 }
-

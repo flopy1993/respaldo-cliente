@@ -2,14 +2,12 @@ import React from 'react'
 import { Button, Modal, Form, Checkbox, Select } from 'semantic-ui-react'
 import $ from 'jquery'
 
-export default class NuevoCliente extends React.Component {
+export default class NuevoProveedor extends React.Component {
     constructor(props) {
         super(props)
         this.agregar = props.agregar
-        console.log(props)
         this.state = {
             open: false,
-            id: 0,
             razonSocial: '',
             tipoContribuyente: 0,
             provincia: 0,
@@ -22,7 +20,6 @@ export default class NuevoCliente extends React.Component {
 
     guardar = () => {
         this.agregar({
-            
             razonSocial: this.state.razonSocial,
             tipoContribuyente: this.state.tipoContribuyente,
             provincia: this.state.provincia,
@@ -32,20 +29,20 @@ export default class NuevoCliente extends React.Component {
             ctacte: this.state.ctacte
         })
 
-        this.setState({
+        this.setState({  
             open: false,
-             razonSocial: '',
+            razonSocial: '',
             tipoContribuyente: 0,
             provincia: 0,
             domicilio: '',
             localidad: 0,
             cuit: 0,
-            ctacte: false
-        })
-    }
+            ctacte: false })
+        console.log(this.agregar)
+        }
 
 
-    close = () => this.setState({
+    close = () => this.setState({  
         open: false,
         razonSocial: '',
         tipoContribuyente: 0,
@@ -53,8 +50,7 @@ export default class NuevoCliente extends React.Component {
         domicilio: '',
         localidad: 0,
         cuit: 0,
-        ctacte: false
-    })
+        ctacte: false })
 
     render() {
 
@@ -74,7 +70,7 @@ export default class NuevoCliente extends React.Component {
             { key: 0, text: 'Responsable Inscripto', value: 0 },
             { key: 1, text: 'Consumidor Final', value: 1 },
             { key: 2, text: 'Exento', value: 2 },
-            { key: 3, text: 'Monotributista', value: 3 }
+            { key: 3, text: 'Monotributista', value: 3 }  
         )
 
         return (
@@ -82,7 +78,7 @@ export default class NuevoCliente extends React.Component {
                 <Button onClick={() => this.setState({ open: true })}>Agregar</Button>
 
                 <Modal size={'large'} open={this.state.open} onClose={() => this.close}>
-                    <Modal.Header>Nuevo Cliente</Modal.Header>
+                    <Modal.Header>Nuevo Proveedor</Modal.Header>
                     <Modal.Content>
                         <Form>
                             <Form.Field>
@@ -90,10 +86,10 @@ export default class NuevoCliente extends React.Component {
                                 <Form.Input value={this.state.razonSocial} onChange={(e, { value }) => this.setState({ razonSocial: value })} />
                             </Form.Field>
                             <Form.Group widths='equal'>
-                                <Form.Field control={Select} label='Tipo Contribuyente' options={tipo} value={this.state.tipoContrubuyente} onChange={(e, { value }) => this.setState({ tipoContribuyente: value })} />
+                                <Form.Field control={Select} label='Tipo Contribuyente' options={tipo} value={this.state.tipoContrubuyente} onChange={(e, { value }) => this.setState({ tipoContribuyente: value })}/>
                                 <Form.Field>
                                     <label>CUIT</label>
-                                    <Form.Input type='number' id='cuit' onSelect={() => $("#cuit").select()} value={this.state.cuit} onChange={(e, { value }) => this.setState({ cuit: value })} />
+                                    <Form.Input type='number' id='cuit' onSelect={()=> $("#cuit").select()} value={this.state.cuit} onChange={(e, { value }) => this.setState({ cuit: value })} />
                                 </Form.Field>
                             </Form.Group>
                             <Form.Group widths='equal'>
