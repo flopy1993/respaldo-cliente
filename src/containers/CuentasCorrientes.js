@@ -26,8 +26,7 @@ export default class CuentasCorrientes extends React.Component {
         return (
             <div className='Segment'>                
                 <Segment>
-                    <Tab menu={{ fluid: true, vertical: true, tabular: true,  pointing: true}} panes={panes} />
-                                   
+                    <Tab menu={{ fluid: true, vertical: true, tabular: true,  pointing: true}} panes={panes} />                                   
                 </Segment>
             </div>
 
